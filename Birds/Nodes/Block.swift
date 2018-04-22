@@ -21,6 +21,14 @@ enum BlockType: String {
             return 200
         }
     }
+    
+    func getImageName() -> String {
+        return self.rawValue
+    }
+    
+    func getBrokenImageName() -> String {
+        return self.rawValue + "Broken"
+    }
 }
 
 class Block: SKSpriteNode {
@@ -34,8 +42,8 @@ class Block: SKSpriteNode {
         self.health = self.type.getProperties()
         
         damageTreshold = health/2
-        
-        super.init(texture: nil, color: UIColor.clear, size: .zero)
+        let texture = SKTexture(imageNamed: type.getImageName())
+        super.init(texture: texture, color: UIColor.clear, size: .zero)
     }
     
     func createPhysicsBody() {
@@ -52,7 +60,8 @@ class Block: SKSpriteNode {
         if health < 1 {
             removeFromParent()
         } else if health < damageTreshold {
-            color = UIColor.red
+            let brokentTexture = SKTexture(imageNamed: type.getBrokenImageName())
+            self.texture = brokentTexture
         }
     }
     

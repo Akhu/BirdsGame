@@ -119,8 +119,8 @@ class GameScene: SKScene {
                 let block = Block(withType: type)
                 block.size = child.size
                 block.position = child.position
-                block.color = UIColor.brown
                 block.zPosition = ZPosition.obstacles
+                block.zRotation = child.zRotation
                 block.createPhysicsBody()
                 mapNode.addChild(block)
                 child.removeFromParent()
@@ -152,15 +152,17 @@ class GameScene: SKScene {
         bird.physicsBody?.contactTestBitMask = PhysicsCategory.all //Contact detection
         bird.physicsBody?.collisionBitMask = PhysicsCategory.block | PhysicsCategory.edge //Collision detection
         bird.physicsBody?.isDynamic = false //Ensure that bird will not fall at start
+        bird.physicsBody?.allowsRotation = true
         bird.position = anchor.position
         addChild(bird)
+        bird.aspectScale(to: mapNode.tileSize, width: false, multiplier: 1.0)
         constraintToAnchor(active: true) //Constraint bird dragging around our launchpad
         roundState = .ready
     }
     
     func constraintToAnchor(active: Bool){
         if active {
-            let slingRange = SKRange(lowerLimit: 0.0, upperLimit: bird.size.width*3)
+            let slingRange = SKRange(lowerLimit: 0.0, upperLimit: bird.size.width*2)
             let positionConstraint = SKConstraint.distance(slingRange, to: anchor.position)
             bird.constraints = [positionConstraint]
         }else {

@@ -16,6 +16,7 @@
 		92A603C62057B18000A77B7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A603C52057B18000A77B7B /* Assets.xcassets */; };
 		92A603C92057B18000A77B7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A603C72057B18000A77B7B /* LaunchScreen.storyboard */; };
 		92CC05352057B486005A2E57 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 92CC05342057B486005A2E57 /* MyTileSet.sks */; };
+		92E130B7208C910500E685BB /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E130B6208C910500E685BB /* SKNode+Extensions.swift */; };
 		92EBCE4A208B1FAB00EC38A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE49208B1FAB00EC38A7 /* Extensions.swift */; };
 		92EBCE4D208B330300EC38A7 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE4C208B330300EC38A7 /* Bird.swift */; };
 		92EBCE4F208B6F2B00EC38A7 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE4E208B6F2B00EC38A7 /* Block.swift */; };
@@ -33,6 +34,7 @@
 		92A603C82057B18000A77B7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92A603CA2057B18000A77B7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92CC05342057B486005A2E57 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
+		92E130B6208C910500E685BB /* SKNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKNode+Extensions.swift"; sourceTree = "<group>"; };
 		92EBCE49208B1FAB00EC38A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92EBCE4C208B330300EC38A7 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		92EBCE4E208B6F2B00EC38A7 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		92A603B72057B18000A77B7B /* Birds */ = {
 			isa = PBXGroup;
 			children = (
+				92E130B5208C90E900E685BB /* Extensions */,
 				92EBCE4B208B32ED00EC38A7 /* Nodes */,
 				929BD8C6205A4E1C005B7338 /* TileSets */,
 				92A603D02057B38100A77B7B /* Assets */,
@@ -121,6 +124,14 @@
 				92A603C02057B18000A77B7B /* GameViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		92E130B5208C90E900E685BB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				92E130B6208C910500E685BB /* SKNode+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		92EBCE4B208B32ED00EC38A7 /* Nodes */ = {
@@ -208,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92EBCE4A208B1FAB00EC38A7 /* Extensions.swift in Sources */,
+				92E130B7208C910500E685BB /* SKNode+Extensions.swift in Sources */,
 				92EBCE4F208B6F2B00EC38A7 /* Block.swift in Sources */,
 				92A603BF2057B18000A77B7B /* GameScene.swift in Sources */,
 				92A603C12057B18000A77B7B /* GameViewController.swift in Sources */,

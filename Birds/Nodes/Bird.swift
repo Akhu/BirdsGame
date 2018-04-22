@@ -23,6 +23,14 @@ enum BirdType: String {
                 return UIColor.yellow
         }
     }
+    
+    func getTexture() -> SKTexture {
+        return SKTexture(imageNamed: self.getImageName())
+    }
+    
+    func getImageName() -> String {
+        return self.rawValue + "1"
+    }
 }
 
 
@@ -40,8 +48,8 @@ class Bird: SKSpriteNode {
     
     init(withBirdType type: BirdType){
         birdType = type
-    
-        super.init(texture: nil, color: self.birdType.getColor(), size: CGSize(width: 40.0, height: 40.0))
+        
+        super.init(texture: type.getTexture(), color: UIColor.clear, size: type.getTexture().size())
     }
     
     required init?(coder aDecoder: NSCoder) {
