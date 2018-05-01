@@ -42,14 +42,28 @@ class Bird: SKSpriteNode {
         didSet {
             if flying {
                 physicsBody?.isDynamic = true
+                self.animateFlight(active: true)
+            }else {
+                self.animateFlight(active: false)
             }
         }
     }
     
+    let flyingFrames: [SKTexture]
+    
     init(withBirdType type: BirdType){
         birdType = type
+        flyingFrames = AnimationHelper.loadTextures(from: SKTextureAtlas(named: type.rawValue), withName: type.rawValue)
         
         super.init(texture: type.getTexture(), color: UIColor.clear, size: type.getTexture().size())
+    }
+    
+    func animateFlight(active: Bool){
+        if active {
+            run(SKAction.repeatForever(SKAction.animate(with: flyingFrames, timePerFrame: 0.1, resize: true, restore: true)))
+        }else {
+            removeAllActions()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

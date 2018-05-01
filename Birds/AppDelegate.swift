@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if let url = Bundle.main.url(forResource: "Levels", withExtension: "plist") {
+            do {
+                let data = try Data(contentsOf: url)
+                try PropertyListDecoder().decode([Level].self, from: data)
+                //Levels.levelsDictionnary =
+            } catch {
+                print("levels file not found 😡")
+                assertionFailure()
+            }
+        }
+        
         return true
     }
 
