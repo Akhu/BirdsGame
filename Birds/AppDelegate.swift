@@ -19,10 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = Bundle.main.url(forResource: "Levels", withExtension: "plist") {
             do {
                 let data = try Data(contentsOf: url)
-                try PropertyListDecoder().decode([Level].self, from: data)
-                //Levels.levelsDictionnary =
-            } catch {
-                print("levels file not found 😡")
+                Levels.levelsDictionnary = try PropertyListDecoder().decode([Level].self, from: data)
+            } catch let error as NSError{
+                print(error.description)
                 assertionFailure()
             }
         }

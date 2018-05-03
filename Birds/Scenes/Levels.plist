@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>level_1</key>
+<array>
 	<dict>
 		<key>birds</key>
 		<array>
@@ -12,7 +11,6 @@
 			<string>red</string>
 		</array>
 	</dict>
-	<key>level_2</key>
 	<dict>
 		<key>birds</key>
 		<array>
@@ -20,5 +18,5 @@
 			<string>gray</string>
 		</array>
 	</dict>
-</dict>
+</array>
 </plist>
