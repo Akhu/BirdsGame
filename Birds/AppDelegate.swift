@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 let data = try Data(contentsOf: url)
                 Levels.levelsDictionnary = try PropertyListDecoder().decode([Level].self, from: data)
+                print(Levels.levelsDictionnary)
             } catch let error as NSError{
                 print(error.description)
                 assertionFailure()

@@ -25,18 +25,33 @@ class GameScene: SKScene {
     var pinchRecognizer = UIPinchGestureRecognizer()
     var maxScale: CGFloat = 0
     
+    
+    
     var bird = Bird(withBirdType: .red)
-    var birds = [
-        Bird(withBirdType: .blue),
-        Bird(withBirdType: .red),
-        Bird(withBirdType: .yellow)
-        ]
+    var birds = [Bird]()
+    
     let anchor = SKNode()
+    
+    var level: Int?
     
     var roundState:RoundState = .ready
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        
+        guard let level = level else { return }
+        
+        guard let currentLevel = Levels.levelsDictionnary[safe: level - 1] else { return }
+        
+        for birdColor in currentLevel.birds {
+            if let newBirdType = BirdType(rawValue: birdColor) {
+                birds.append(Bird(withBirdType: newBirdType))
+            }
+        }
+        
+        //guard let levelData = Levels.levelsDictionnary[level] else { return }
+        
+        
         setupLevel()
         
         setupGestureRecognizer()
