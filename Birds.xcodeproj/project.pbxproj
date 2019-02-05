@@ -27,6 +27,8 @@
 		92EBCE4A208B1FAB00EC38A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE49208B1FAB00EC38A7 /* Extensions.swift */; };
 		92EBCE4D208B330300EC38A7 /* Bird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE4C208B330300EC38A7 /* Bird.swift */; };
 		92EBCE4F208B6F2B00EC38A7 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBCE4E208B6F2B00EC38A7 /* Block.swift */; };
+		92F80729220A2C5A00425A68 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F80728220A2C5A00425A68 /* Enemy.swift */; };
+		92F8072B220A388D00425A68 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8072A220A388D00425A68 /* Popup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		92EBCE49208B1FAB00EC38A7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92EBCE4C208B330300EC38A7 /* Bird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird.swift; sourceTree = "<group>"; };
 		92EBCE4E208B6F2B00EC38A7 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		92F80728220A2C5A00425A68 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		92F8072A220A388D00425A68 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 				929BD8C7205A501F005B7338 /* GameCamera.swift */,
 				92EBCE4C208B330300EC38A7 /* Bird.swift */,
 				92EBCE4E208B6F2B00EC38A7 /* Block.swift */,
+				92F80728220A2C5A00425A68 /* Enemy.swift */,
+				92F8072A220A388D00425A68 /* Popup.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F80729220A2C5A00425A68 /* Enemy.swift in Sources */,
 				9293917720989F4000F2E99C /* Level.swift in Sources */,
 				92EBCE4A208B1FAB00EC38A7 /* Extensions.swift in Sources */,
 				92E130B7208C910500E685BB /* SKNode+Extensions.swift in Sources */,
@@ -260,6 +267,7 @@
 				92A603C12057B18000A77B7B /* GameViewController.swift in Sources */,
 				92939173209899DE00F2E99C /* AnimationHelper.swift in Sources */,
 				929BD8C8205A501F005B7338 /* GameCamera.swift in Sources */,
+				92F8072B220A388D00425A68 /* Popup.swift in Sources */,
 				92EBCE4D208B330300EC38A7 /* Bird.swift in Sources */,
 				92A603B92057B18000A77B7B /* AppDelegate.swift in Sources */,
 			);
@@ -399,10 +407,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YFZ9A994PW;
+				DEVELOPMENT_TEAM = 2KSK6YV8G7;
 				INFOPLIST_FILE = Birds/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anthony.Birds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anthony.game.Birds;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -414,10 +422,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YFZ9A994PW;
+				DEVELOPMENT_TEAM = 2KSK6YV8G7;
 				INFOPLIST_FILE = Birds/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anthony.Birds;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anthony.game.Birds;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

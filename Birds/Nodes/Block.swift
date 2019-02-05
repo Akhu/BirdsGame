@@ -70,3 +70,17 @@ class Block: SKSpriteNode {
     }
     
 }
+
+
+extension Block {
+    static func createBlocks(fromPlaceholder placeholder: SKSpriteNode, name: String) -> Block? {
+        guard let type = BlockType(rawValue: name) else { return nil }
+        let block = Block(withType: type)
+        block.size = placeholder.size
+        block.position = placeholder.position
+        block.zPosition = ZPosition.obstacles
+        block.zRotation = placeholder.zRotation
+        block.createPhysicsBody()
+        return block
+    }
+}

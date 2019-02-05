@@ -25,6 +25,14 @@ class GameScene: SKScene {
     var pinchRecognizer = UIPinchGestureRecognizer()
     var maxScale: CGFloat = 0
     
+    var enemies = 0 {
+        didSet {
+            if enemies < 1 {
+                print("All enemies down !")
+            }
+        }
+    }
+    
     
     
     var bird = Bird(withBirdType: .red)
@@ -130,19 +138,27 @@ class GameScene: SKScene {
         addCamera()
         
         for child in mapNode.children {
-            if let child = child as? SKSpriteNode,
-                let name = child.name, ["wood", "glass", "stone"].contains(name), let type = BlockType(rawValue: name) {
-                let block = Block(withType: type)
-                block.size = child.size
-                block.position = child.position
-                block.zPosition = ZPosition.obstacles
-                block.zRotation = child.zRotation
-                block.createPhysicsBody()
-                mapNode.addChild(block)
-                child.removeFromParent()
-            } else { continue }
+            if let childUnwrapped = child as? SKSpriteNode {
+                guard let name = childUnwrapped.name else { continue }
+                
+                switch name {
+                case "wood", "stone", "glass":
+                    if let block = Block.createBlocks(fromPlaceholder: childUnwrapped, name: name) {
+                        mapNode.addChild(block)
+                        childUnwrapped.removeFromParent()
+                    }
+                
+                case "orange":
+                    mapNode.addChild(Enemy.createEnemy(fromPlaceholder: childUnwrapped, name: name))
+                    enemies += 1
+                    childUnwrapped.removeFromParent()
+                    break
+                
+                default:
+                    break
+                }
+            }
         }
-        
         let physicsRect = CGRect(x: 0, y: mapNode.tileSize.height, width: self.mapNode.frame.size.width, height: self.mapNode.frame.size.height - mapNode.tileSize.height)
         physicsBody = SKPhysicsBody(edgeLoopFrom: physicsRect) //Create our physics boundaries
         physicsBody?.categoryBitMask = PhysicsCategory.edge
@@ -153,12 +169,16 @@ class GameScene: SKScene {
         anchor.position = CGPoint(x: mapNode.frame.midX/2, y: mapNode.frame.midY/2) //Used to set a spawn position for our birds
         addChild(anchor)
         addBird()
+        addSlingshot()
     }
+
+
     
+        
     
     func addBird() {
         if birds.isEmpty {
-            print("no more birds")
+            print("Game Over")
             return
         }
         
@@ -170,10 +190,22 @@ class GameScene: SKScene {
         bird.physicsBody?.isDynamic = false //Ensure that bird will not fall at start
         bird.physicsBody?.allowsRotation = true
         bird.position = anchor.position
+        bird.zPosition = ZPosition.bird
         addChild(bird)
-        bird.aspectScale(to: mapNode.tileSize, width: false, multiplier: 1.0)
+        bird.aspectScale(to: mapNode.tileSize, width: true, multiplier: 1.0)
         constraintToAnchor(active: true) //Constraint bird dragging around our launchpad
         roundState = .ready
+    }
+    
+    func addSlingshot() {
+        let slingshot = SKSpriteNode(imageNamed: "slingshot")
+        let scaleSize = CGSize(width: 0, height: mapNode.frame.midY/2 - mapNode.tileSize.height / 2)
+        slingshot.aspectScale(to: scaleSize, width: false, multiplier: 1.0)
+        //tileSize = taille d'un carré du sol, on veut que le lance pierre soit à la hauteur du sol, logique
+        //position.x = position en x de l'oiseau
+        slingshot.position = CGPoint(x: anchor.position.x, y: mapNode.tileSize.height + slingshot.size.height / 2)
+        slingshot.zPosition = ZPosition.obstacles
+        mapNode.addChild(slingshot)
     }
     
     func constraintToAnchor(active: Bool){
@@ -230,6 +262,16 @@ extension GameScene: SKPhysicsContactDelegate {
             }
         case PhysicsCategory.bird | PhysicsCategory.edge:
             bird.flying = false
+        case PhysicsCategory.bird | PhysicsCategory.enemy:
+            if let enemy = contact.bodyA.node as? Enemy {
+                if enemy.impactAndIsDead(withForce: Int(contact.collisionImpulse)) {
+                    enemies -= 1
+                }
+            }else if let enemy = contact.bodyB.node as? Enemy {
+                if enemy.impactAndIsDead(withForce: Int(contact.collisionImpulse)) {
+                    enemies -= 1
+                }
+            }
         default:
             break
         }
