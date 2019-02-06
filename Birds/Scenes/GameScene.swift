@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 enum RoundState {
-    case ready, flying, finished, animating
+    case ready, flying, finished, animating, gameOver
 }
 
 class GameScene: SKScene {
@@ -28,7 +28,8 @@ class GameScene: SKScene {
     var enemies = 0 {
         didSet {
             if enemies < 1 {
-                print("All enemies down !")
+                roundState = .gameOver
+                presentPopup(victory: true)
             }
         }
     }
@@ -43,6 +44,33 @@ class GameScene: SKScene {
     var level: Int?
     
     var roundState:RoundState = .ready
+    
+    func presentPopup(victory:Bool){
+        var popup:Popup
+        if victory {
+            popup = Popup(type: 0, size: frame.size)
+            popup.zPosition = ZPosition.hudBackground
+            
+        } else {
+            popup = Popup(type: 1, size: frame.size)
+            popup.zPosition = ZPosition.hudBackground
+        }
+        
+        popup.menuClicked = {
+            self.sceneManagerDelegate?.presentMenuScene()
+        }
+        popup.nextClicked = {
+            if let level = self.level {
+                self.sceneManagerDelegate?.presentGameSceneFor(level: level + 1)
+            }
+        }
+        popup.retryClicked = {
+            if let level = self.level {
+                self.sceneManagerDelegate?.presentGameSceneFor(level: level)
+            }
+        }
+        gameCamera.addChild(popup)
+    }
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -88,6 +116,9 @@ class GameScene: SKScene {
                 self.addBird()
             }
         case .animating:
+            break
+        case .gameOver:
+            
             break
         }
         
@@ -178,7 +209,8 @@ class GameScene: SKScene {
     
     func addBird() {
         if birds.isEmpty {
-            print("Game Over")
+            roundState = .gameOver
+            presentPopup(victory: false)
             return
         }
         

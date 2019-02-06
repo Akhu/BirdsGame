@@ -17,6 +17,9 @@ struct PopupButtons {
 class Popup: SKSpriteNode {
     
     let type: Int
+    var menuClicked: (() -> ())? = nil
+    var retryClicked: (() -> ())? = nil
+    var nextClicked: (() -> ())? = nil
     
     init(type: Int, size: CGSize){
         self.type = type
@@ -59,6 +62,18 @@ class Popup: SKSpriteNode {
     }
     
     func popupButtonHandler(index: Int){
-        
+        switch index {
+        case PopupButtons.menu:
+            self.menuClicked?()
+            break
+        case PopupButtons.next:
+            self.nextClicked?()
+            break
+        case PopupButtons.retry:
+            self.retryClicked?()
+            break
+        default:
+            break
+        }
     }
 }
